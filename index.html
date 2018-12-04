@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Зеркало: bot Декарт. Каталог статей">
+    <title>Зеркало: bot Декарт</title>    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">    
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <!--<![endif]-->   
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="css/layouts/blog-old-ie.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="css/layouts/blog.css">
+        <!--<![endif]-->
+</head>
+<body>
+	<div id="layout" class="pure-g">
+		
+		<div class="sidebar pure-u-1 pure-u-md-1-4">
+			<div class="header">
+				<div class="header-t"></div>				
+				<nav class="nav">
+					<ul class="nav-list">
+						<li class="nav-item">
+							<a class="pure-button" href="https://bot-descartes.netlify.com/">Головна</a>
+						</li>
+						<li class="nav-item">
+							<a class="pure-button" href="https://bot-descartes.netlify.com/api/">API</a>
+						</li>
+						<li class="nav-item">
+							<a class="pure-button" href="https://bot-descartes.netlify.com/api/articles.json">Json</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		<div class="content pure-u-1 pure-u-md-3-4">
+            
+			<div class="posts">
+				<h1 class="content-subhead">Зеркало. Повний список статей</h1>
+			</div>
+            <div class="posts-a posts">
+				<!-- A wrapper for all the blog posts -->                
+            </div>
+
+            <div class="footer">
+                <div class="pure-menu pure-menu-horizontal">
+                    <ul>
+                        <li class="pure-menu-item"><a href="http://purecss.io/" class="pure-menu-link">About</a></li>
+                        <li class="pure-menu-item"><a href="http://twitter.com/yuilibrary/" class="pure-menu-link">Twitter</a></li>
+                        <li class="pure-menu-item"><a href="http://github.com/pure-css/pure/" class="pure-menu-link">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>        
+    </div>    
+</div>  
+	  
+<script>
+    var header = document.querySelector('.header-t');
+    var section = document.querySelector('.posts-a');
+    var requestURL = 'https://bot-descartes.netlify.com/api/articles.json';
+    var request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'text';
+    request.send();
+    request.onload = function() {
+      var superHeroesText = request.response;
+      var superHeroes = JSON.parse(superHeroesText);
+      populateHeader(superHeroes);
+      showHeroes(superHeroes);
+    }
+    function populateHeader(jsonObj) {
+      var myH1 = document.createElement('h1');
+      myH1.textContent = jsonObj['Name'];
+      myH1.className = 'brand-title';
+      header.appendChild(myH1);
+      var myPara = document.createElement('h2');
+      myPara.textContent = jsonObj['description'];
+      myPara.className = 'brand-tagline';
+      header.appendChild(myPara);
+    }
+    function showHeroes(jsonObj) {
+      var heroes = jsonObj['articles'];
+      for(var i = 0; i < heroes.length; i++) {
+        var myArticle = document.createElement('section');
+        var d = new Date(heroes[i].date);        
+        myArticle.className = 'post';
+        myArticle.innerHTML = '<div class="pure-g"><div class="pure-u-7-8 pure-u-md-4-5"><header class="post-header"><h2 class="post-title">' + heroes[i].title + '</h2><p class="post-meta"><a class="button-large pure-button pure-button-primary" href="' + heroes[i].file + '">Завантажити</a> Опубліковано ' + d.toLocaleDateString()+ '</p></header><div class="post-description"><p>' + heroes[i].title + '</p></div></div><div class="pure-u-1-8 pure-u-md-1-5 post-images"><img src="' + heroes[i].img + '" class="pure-img-responsive"></div>';
+        section.appendChild(myArticle);
+      }
+    }
+    </script>
+  </body>
+</html>
