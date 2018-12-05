@@ -1,0 +1,43 @@
+# netlify.toml
+# This file should be at the root of your project
+#  command = "jekyll build && jekyll algolia"
+##[build]
+##  command = "jekyll build && jekyll algolia"
+##  publish = "_site"
+
+# Json
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+# Cache
+[[headers]]
+  for = "*.js" # js files should be set this way
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "*.css" # css files too
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "*.jpg" # jpg files too
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "*.webp" # wepp files too
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "*.pdf" # pdf files too
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "*.html" # html files too
+  [headers.values]
+    Cache-Control = "public, max-age=43200"
