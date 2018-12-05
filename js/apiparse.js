@@ -28,7 +28,7 @@ function showHeroes(jsonObj) {
     var d = new Date(heroes[i].date);
     var webp = heroes[i].img;
     myArticle.className = 'post';
-    myArticle.innerHTML = '<div class="pure-g"><div class="pure-u-7-8 pure-u-md-4-5"><header class="post-header"><h2 class="post-title">' + heroes[i].title + '</h2><p class="post-meta"><a class="button-large pure-button pure-button-primary" href="' + heroes[i].file + '">Завантажити</a> Опубліковано <time datetime="' + d.toLocaleDateString()+ '">' + d.toLocaleDateString()+ '</time></p></header><div class="post-description"><p>' + heroes[i].strippost + '</p></div></div><div class="pure-u-1-8 pure-u-md-1-5 post-images"><picture><source srcset="' + webp.replace("jpg", "webp") + '" type="image/webp"><img src="' + heroes[i].img + '" class="pure-img-responsive"></picture></div>';
+    myArticle.innerHTML = '<div class="pure-g"><div class="pure-u-7-8 pure-u-md-4-5"><header class="post-header"><h2 class="post-title">' + heroes[i].title + '</h2><p class="post-meta"><a class="button-large pure-button pure-button-primary" href="' + heroes[i].file + '">Завантажити</a> Опубліковано <time datetime="' + heroes[i].date + '">' + d.toLocaleDateString()+ '</time></p></header><div class="post-description"><p>' + heroes[i].strippost + '</p></div></div><div class="pure-u-1-8 pure-u-md-1-5 post-images"><picture><source srcset="' + webp.replace("jpg", "webp") + '" type="image/webp"><img src="' + heroes[i].img + '" class="pure-img-responsive"></picture></div>';
     section.appendChild(myArticle);
   }
 }
